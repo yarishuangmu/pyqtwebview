@@ -1,0 +1,78 @@
+# PyQt5 WebView 示例应用依赖
+# ===============================
+# 
+# 这个文件列出了运行PyQt5 WebView示例应用所需的Python包。
+# 安装方法: pip install -r requirements.txt
+#
+# 核心依赖说明：
+# - PyQt5: 提供GUI框架和WebEngine支持
+# - PyQtWebEngine: Web渲染引擎，基于Chromium
+
+# PyQt5 核心包
+# =============
+# PyQt5是Python的Qt5绑定，提供完整的GUI开发框架
+PyQt5>=5.15.0
+
+# PyQt5 WebEngine
+# ===============
+# 基于Chromium的Web渲染引擎，支持现代Web标准
+# 包含QWebEngineView、QWebChannel等关键组件
+PyQtWebEngine>=5.15.0
+
+# 可选依赖 (用于增强功能)
+# =========================
+
+# 用于美化命令行输出 (可选)
+# colorama>=0.4.0
+
+# 用于配置文件处理 (可选)
+# configparser>=5.0.0
+
+# 用于日志功能增强 (可选)
+# loguru>=0.6.0
+
+# 用于JSON Schema验证 (可选)
+# jsonschema>=4.0.0
+
+# 开发依赖 (仅开发时需要)
+# =========================
+
+# 代码格式化工具
+# black>=22.0.0
+
+# 代码检查工具
+# pylint>=2.15.0
+
+# 类型检查工具
+# mypy>=0.991
+
+# 测试框架
+# pytest>=7.0.0
+
+# 说明和注意事项
+# ===============
+#
+# 1. 系统要求:
+#    - Python 3.6+
+#    - 支持Qt5的操作系统 (Windows, macOS, Linux)
+#    - 足够的内存运行Chromium引擎 (推荐4GB+)
+#
+# 2. 安装说明:
+#    - Windows: pip install PyQt5 PyQtWebEngine
+#    - macOS: pip install PyQt5 PyQtWebEngine (可能需要brew install qt5)
+#    - Linux: sudo apt-get install python3-pyqt5 python3-pyqt5.qtwebengine (Ubuntu/Debian)
+#              或 pip install PyQt5 PyQtWebEngine
+#
+# 3. 可能遇到的问题:
+#    - WebEngine需要显卡加速支持
+#    - 某些Linux发行版可能需要额外的Qt5库
+#    - macOS可能需要额外配置路径
+#
+# 4. 替代方案:
+#    - 如果PyQtWebEngine安装困难，可以考虑使用PyQt5.QtWebKit (功能较少)
+#    - 也可以使用tkinter + webview库作为轻量级替代
+#
+# 5. 版本兼容性:
+#    - PyQt5 5.15.x 是最后的开源版本
+#    - 更新版本需要商业许可证
+#    - 建议使用稳定的LTS版本

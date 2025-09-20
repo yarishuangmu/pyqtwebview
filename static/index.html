@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyQt5 WebView 示例 - Python与JavaScript交互</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 
+    HTML示例页面 - PyQt5 WebView集成
+    ===================================
+    
+    这个页面展示了如何在PyQt5 WebEngine中创建现代化的Web界面，
+    重点演示Python与JavaScript的双向通信机制。
+    
+    技术要点：
+    - QWebChannel的JavaScript端使用
+    - 异步调用Python方法
+    - 事件监听和回调处理
+    - 现代Web界面设计
+    -->
+    
+    <div class="container">
+        <!-- 页面标题区域 -->
+        <header class="header">
+            <h1>🌟 PyQt5 WebView 示例应用</h1>
+            <p class="subtitle">深入理解PyQt5与WebEngine的集成机制</p>
+        </header>
+        
+        <!-- 系统信息展示区域 -->
+        <section class="info-section">
+            <h2>📊 系统信息</h2>
+            <div class="info-grid">
+                <div class="info-card" onclick="getSystemInfo()">
+                    <h3>🖥️ 系统详情</h3>
+                    <p>点击获取详细的系统信息</p>
+                    <div id="systemInfo" class="info-content"></div>
+                </div>
+                
+                <div class="info-card" onclick="getPythonInfo()">
+                    <h3>🐍 Python版本</h3>
+                    <p>查看当前Python环境信息</p>
+                    <div id="pythonInfo" class="info-content"></div>
+                </div>
+                
+                <div class="info-card" onclick="getDebugInfo()">
+                    <h3>🔧 调试信息</h3>
+                    <p>获取应用程序调试详情</p>
+                    <div id="debugInfo" class="info-content"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Python交互演示区域 -->
+        <section class="interaction-section">
+            <h2>🔄 Python交互演示</h2>
+            
+            <!-- 消息通信 -->
+            <div class="demo-group">
+                <h3>💬 消息通信</h3>
+                <div class="input-group">
+                    <input type="text" id="messageInput" placeholder="输入要发送给Python的消息..." value="Hello from JavaScript!">
+                    <button onclick="sendMessage()">发送消息</button>
+                    <button onclick="showAlert()">显示对话框</button>
+                </div>
+            </div>
+            
+            <!-- 数据存储 -->
+            <div class="demo-group">
+                <h3>💾 数据存储</h3>
+                <div class="input-group">
+                    <input type="text" id="dataKey" placeholder="数据键" value="用户名">
+                    <input type="text" id="dataValue" placeholder="数据值" value="张三">
+                    <button onclick="storeData()">存储数据</button>
+                    <button onclick="getData()">获取数据</button>
+                    <button onclick="getAllData()">获取全部</button>
+                    <button onclick="clearData()">清空数据</button>
+                </div>
+                <div id="dataResult" class="result-area"></div>
+            </div>
+            
+            <!-- 数学计算 -->
+            <div class="demo-group">
+                <h3>🧮 数学计算</h3>
+                <div class="input-group">
+                    <input type="text" id="mathExpression" placeholder="输入数学表达式..." value="2 * 3 + sqrt(16)">
+                    <button onclick="calculate()">计算</button>
+                    <button onclick="insertMathExample()">示例公式</button>
+                </div>
+                <div id="mathResult" class="result-area"></div>
+            </div>
+            
+            <!-- 文件操作 -->
+            <div class="demo-group">
+                <h3>📁 文件操作</h3>
+                <div class="input-group">
+                    <input type="text" id="filePath" placeholder="文件路径" value="README.md">
+                    <button onclick="readFile()">读取文件</button>
+                    <button onclick="listFiles()">列出文件</button>
+                </div>
+                <div id="fileResult" class="result-area"></div>
+            </div>
+        </section>
+        
+        <!-- JavaScript代码演示区域 -->
+        <section class="code-section">
+            <h2>💻 JavaScript代码演示</h2>
+            <div class="code-group">
+                <textarea id="jsCode" class="code-input" placeholder="在此输入JavaScript代码进行测试...">
+// 测试Python-JavaScript通信
+bridge.get_python_version(function(version) {
+    console.log("Python版本:", version);
+    bridge.log_message("info", "JavaScript成功调用Python方法");
+});
+
+// 测试回显功能
+bridge.echo_message("测试消息", function(result) {
+    console.log("回显结果:", result);
+});</textarea>
+                <div class="button-group">
+                    <button onclick="executeCode()">执行代码</button>
+                    <button onclick="clearCode()">清空代码</button>
+                    <button onclick="loadExample()">加载示例</button>
+                </div>
+            </div>
+            <div id="codeResult" class="result-area"></div>
+        </section>
+        
+        <!-- 应用控制区域 -->
+        <section class="control-section">
+            <h2>⚙️ 应用控制</h2>
+            <div class="control-group">
+                <input type="text" id="windowTitle" placeholder="新窗口标题" value="自定义标题 - PyQt5 WebView">
+                <button onclick="setWindowTitle()">设置标题</button>
+                <button onclick="testCallback()">测试回调</button>
+                <button onclick="quitApp()" class="danger-btn">退出应用</button>
+            </div>
+        </section>
+        
+        <!-- 日志输出区域 -->
+        <section class="log-section">
+            <h2>📝 操作日志</h2>
+            <div id="logOutput" class="log-output"></div>
+            <button onclick="clearLog()">清空日志</button>
+        </section>
+        
+        <!-- 技术说明区域 -->
+        <section class="tech-section">
+            <h2>📚 技术说明</h2>
+            <div class="tech-content">
+                <div class="tech-item">
+                    <h4>🔗 QWebChannel通信机制</h4>
+                    <p>PyQt5通过QWebChannel实现Python与JavaScript的双向通信，支持异步调用、数据类型自动转换和事件监听。</p>
+                </div>
+                
+                <div class="tech-item">
+                    <h4>🎯 装饰器与槽函数</h4>
+                    <p>使用@pyqtSlot装饰器标记Python方法，使其可被JavaScript调用。支持指定参数类型和返回值类型。</p>
+                </div>
+                
+                <div class="tech-item">
+                    <h4>🔄 事件驱动架构</h4>
+                    <p>基于Qt的信号-槽机制，实现松耦合的事件驱动架构，提高代码的可维护性和扩展性。</p>
+                </div>
+                
+                <div class="tech-item">
+                    <h4>🌐 Web技术集成</h4>
+                    <p>结合现代Web技术（HTML5、CSS3、ES6+）与Python桌面应用，兼具Web的灵活性和桌面应用的稳定性。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- 加载状态指示器 -->
+    <div id="loadingIndicator" class="loading-indicator">
+        <div class="spinner"></div>
+        <p>初始化Python-JavaScript通信通道...</p>
+    </div>
+    
+    <!-- 引入JavaScript文件 -->
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

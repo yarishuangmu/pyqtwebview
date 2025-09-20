@@ -1,0 +1,672 @@
+/*
+PyQt5 WebView 示例应用样式表
+=============================
+
+这个CSS文件为PyQt5 WebView示例应用提供现代化的界面样式。
+展示了如何在PyQt5 WebEngine中创建美观的用户界面。
+
+技术要点：
+- 现代CSS3特性：flexbox、grid、动画
+- 响应式设计原则
+- 色彩搭配和视觉层次
+- 用户体验优化
+*/
+
+/* =============================
+   基础样式和重置
+   ============================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =============================
+   主容器和布局
+   ============================= */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* =============================
+   页面标题区域
+   ============================= */
+
+.header {
+    text-align: center;
+    padding: 30px 0;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.header h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #7f8c8d;
+    font-weight: 300;
+}
+
+/* =============================
+   信息卡片区域
+   ============================= */
+
+.info-section {
+    margin-bottom: 40px;
+}
+
+.info-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3498db;
+    font-size: 1.8em;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border-color: #3498db;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2ecc71, #f39c12);
+}
+
+.info-card h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.info-card p {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.info-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* =============================
+   交互演示区域
+   ============================= */
+
+.interaction-section {
+    margin-bottom: 40px;
+}
+
+.interaction-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #e74c3c;
+    font-size: 1.8em;
+}
+
+.demo-group {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #e74c3c;
+}
+
+.demo-group h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.input-group input {
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 150px;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.input-group button {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.input-group button:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.input-group button:active {
+    transform: translateY(0);
+}
+
+.danger-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+}
+
+.danger-btn:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%) !important;
+}
+
+.result-area {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+}
+
+/* =============================
+   代码演示区域
+   ============================= */
+
+.code-section {
+    margin-bottom: 40px;
+}
+
+.code-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #9b59b6;
+    font-size: 1.8em;
+}
+
+.code-group {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #9b59b6;
+}
+
+.code-input {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    background: #1e1e1e;
+    color: #d4d4d4;
+}
+
+.code-input:focus {
+    outline: none;
+    border-color: #9b59b6;
+    box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.button-group button {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.button-group button:hover {
+    background: linear-gradient(135deg, #8e44ad 0%, #7d3c98 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* =============================
+   控制区域
+   ============================= */
+
+.control-section {
+    margin-bottom: 40px;
+}
+
+.control-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #f39c12;
+    font-size: 1.8em;
+}
+
+.control-group {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #f39c12;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.control-group input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.control-group input:focus {
+    outline: none;
+    border-color: #f39c12;
+    box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.1);
+}
+
+.control-group button {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.control-group button:hover {
+    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* =============================
+   日志输出区域
+   ============================= */
+
+.log-section {
+    margin-bottom: 40px;
+}
+
+.log-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #2ecc71;
+    font-size: 1.8em;
+}
+
+.log-output {
+    background: #1e1e1e;
+    color: #00ff00;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border: 2px solid #2ecc71;
+    position: relative;
+}
+
+.log-output::before {
+    content: 'JavaScript控制台输出';
+    position: absolute;
+    top: -12px;
+    left: 15px;
+    background: #1e1e1e;
+    color: #2ecc71;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* =============================
+   技术说明区域
+   ============================= */
+
+.tech-section {
+    margin-bottom: 40px;
+}
+
+.tech-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #34495e;
+    font-size: 1.8em;
+}
+
+.tech-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.tech-item {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #34495e;
+    transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.tech-item h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.tech-item p {
+    color: #7f8c8d;
+    line-height: 1.7;
+}
+
+/* =============================
+   加载状态指示器
+   ============================= */
+
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    font-size: 18px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-indicator.hidden {
+    display: none;
+}
+
+/* =============================
+   滚动条样式
+   ============================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+}
+
+/* =============================
+   响应式设计
+   ============================= */
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .input-group input,
+    .input-group button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .control-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .control-group input,
+    .control-group button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .button-group button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .tech-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+    }
+    
+    .container {
+        margin: 5px;
+        padding: 10px;
+    }
+}
+
+/* =============================
+   动画和过渡效果
+   ============================= */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container > section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.container > section:nth-child(2) { animation-delay: 0.1s; }
+.container > section:nth-child(3) { animation-delay: 0.2s; }
+.container > section:nth-child(4) { animation-delay: 0.3s; }
+.container > section:nth-child(5) { animation-delay: 0.4s; }
+.container > section:nth-child(6) { animation-delay: 0.5s; }
+
+/* =============================
+   工具提示样式
+   ============================= */
+
+[title] {
+    position: relative;
+}
+
+/* =============================
+   打印样式
+   ============================= */
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .container {
+        box-shadow: none;
+        background: white;
+    }
+    
+    .loading-indicator {
+        display: none !important;
+    }
+    
+    .control-section {
+        display: none;
+    }
+}
