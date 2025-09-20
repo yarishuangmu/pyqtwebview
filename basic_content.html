@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyQt5 WebView 基础示例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-card li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .feature-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #00b894, #00a085);
+        }
+        
+        .info-display {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            min-height: 50px;
+            border-left: 4px solid #ffd700;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header fade-in">
+            <h1>🚀 PyQt5 WebView</h1>
+            <p>强大的桌面应用程序开发解决方案</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card fade-in">
+                <h3><span class="icon">💻</span>桌面集成</h3>
+                <ul>
+                    <li>原生桌面应用外观</li>
+                    <li>系统菜单栏集成</li>
+                    <li>窗口管理功能</li>
+                    <li>文件系统访问</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <h3><span class="icon">🌐</span>Web技术</h3>
+                <ul>
+                    <li>现代HTML5支持</li>
+                    <li>CSS3动画效果</li>
+                    <li>JavaScript交互</li>
+                    <li>响应式设计</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <h3><span class="icon">🔧</span>开发优势</h3>
+                <ul>
+                    <li>快速界面开发</li>
+                    <li>跨平台兼容</li>
+                    <li>丰富的组件库</li>
+                    <li>灵活的布局系统</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h3>🎮 交互演示</h3>
+            <p>尝试下面的按钮来体验Web与桌面应用的交互：</p>
+            
+            <div class="demo-buttons">
+                <button class="btn" onclick="showCurrentTime()">显示当前时间</button>
+                <button class="btn btn-secondary" onclick="changeBackground()">切换背景</button>
+                <button class="btn btn-success" onclick="showSystemInfo()">系统信息</button>
+                <button class="btn" onclick="animateElements()">动画效果</button>
+            </div>
+            
+            <div id="infoDisplay" class="info-display">
+                点击上面的按钮来查看不同的演示效果...
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h3>📖 使用说明</h3>
+            <p>这个基础示例展示了：</p>
+            <ul style="margin-top: 15px; padding-left: 20px;">
+                <li>如何在PyQt5应用中嵌入WebView组件</li>
+                <li>HTML内容的加载和显示</li>
+                <li>基本的CSS样式和动画</li>
+                <li>JavaScript与界面的交互</li>
+                <li>菜单栏和窗口管理</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        let backgroundIndex = 0;
+        const backgrounds = [
+            'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+            'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+            'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+        ];
+        
+        function showCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN');
+            document.getElementById('infoDisplay').innerHTML = 
+                `<strong>当前时间:</strong> ${timeString}`;
+        }
+        
+        function changeBackground() {
+            backgroundIndex = (backgroundIndex + 1) % backgrounds.length;
+            document.body.style.background = backgrounds[backgroundIndex];
+            document.getElementById('infoDisplay').innerHTML = 
+                `<strong>背景已切换!</strong> 当前使用背景样式 ${backgroundIndex + 1}`;
+        }
+        
+        function showSystemInfo() {
+            const info = {
+                '用户代理': navigator.userAgent,
+                '屏幕分辨率': `${screen.width} x ${screen.height}`,
+                '颜色深度': `${screen.colorDepth} bit`,
+                '语言': navigator.language,
+                '在线状态': navigator.onLine ? '在线' : '离线'
+            };
+            
+            let infoHtml = '<strong>系统信息:</strong><br>';
+            for (const [key, value] of Object.entries(info)) {
+                infoHtml += `<div style="margin: 5px 0;"><strong>${key}:</strong> ${value}</div>`;
+            }
+            
+            document.getElementById('infoDisplay').innerHTML = infoHtml;
+        }
+        
+        function animateElements() {
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = 'fadeInUp 0.6s ease-out';
+                    }, 10);
+                }, index * 200);
+            });
+            
+            document.getElementById('infoDisplay').innerHTML = 
+                '<strong>动画效果已触发!</strong> 特性卡片重新播放了进入动画。';
+        }
+        
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('infoDisplay').innerHTML = 
+                    '<strong>欢迎使用 PyQt5 WebView!</strong> 这是一个功能完整的基础示例。';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

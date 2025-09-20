@@ -1,0 +1,32 @@
+{
+  "sample_data": [
+    {
+      "name": "用户设置",
+      "value": "language=zh-CN,theme=dark",
+      "description": "用户界面配置"
+    },
+    {
+      "name": "窗口位置",
+      "value": "x=100,y=100,width=1200,height=800",
+      "description": "应用窗口的位置和大小"
+    },
+    {
+      "name": "数据库配置",
+      "value": "auto_backup=true,max_records=1000",
+      "description": "数据库相关配置"
+    }
+  ],
+  "tips": [
+    "可以在高级示例中测试数据的保存和读取功能",
+    "尝试使用文件选择功能打开不同类型的文件",
+    "测试桌面通知功能的各种消息类型",
+    "查看系统信息获取功能的详细信息"
+  ],
+  "advanced_features": {
+    "python_js_communication": "通过QWebChannel实现双向通信",
+    "database_integration": "SQLite数据库的完整集成",
+    "file_operations": "系统文件对话框和文件信息获取",
+    "desktop_notifications": "原生桌面通知消息",
+    "real_time_updates": "实时数据更新和界面刷新"
+  }
+}
