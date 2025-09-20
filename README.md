@@ -1,0 +1,2 @@
+# pyqtwebview
+一个例子关于如何使用pyqt5的webview和pyqt本身结合开发桌面应用程序。
